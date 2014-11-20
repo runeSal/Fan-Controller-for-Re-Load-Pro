@@ -8,6 +8,14 @@
 #include <stdint.h>
 #include <avr/io.h>
 #include <avr/wdt.h>
+#include <avr/fuse.h>
+
+FUSES =
+{
+	.low = (FUSE_CKSEL1 & FUSE_SUT0 & FUSE_SUT1 & FUSE_CKDIV8),
+	.high = (FUSE_BODLEVEL0 & FUSE_SPIEN),
+	.extended = EFUSE_DEFAULT,
+};
 
 #include "DS18B20.h"
 #include "settings.h"
