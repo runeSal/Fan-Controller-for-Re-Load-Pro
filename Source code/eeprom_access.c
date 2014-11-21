@@ -15,7 +15,7 @@ uint16_t EEMEM EE_FAN_T_MAX		=	49*16; //=49°C
 uint16_t EEMEM EE_FAN_T_MIN		=	40*16; //=40°C
 uint16_t EEMEM EE_FAN_T_START	=	39*16; //=39°C
 uint16_t EEMEM EE_FAN_T_OFF		=	38*16; //=38°C
-uint16_t EEMEM EE_FAN_PWM_MIN	=	35; //=20%
+uint16_t EEMEM EE_FAN_DUTY_MIN	=	35; //=20%
 
 void eeprom_update(void)
 {
@@ -23,7 +23,7 @@ void eeprom_update(void)
 	eeprom_update_word(&EE_FAN_T_MIN, FAN_T_MIN);
 	eeprom_update_word(&EE_FAN_T_START, FAN_T_START);
 	eeprom_update_word(&EE_FAN_T_OFF, FAN_T_OFF);
-	eeprom_update_word(&EE_FAN_PWM_MIN, FAN_PWM_MIN);
+	eeprom_update_word(&EE_FAN_DUTY_MIN, FAN_DUTY_MIN);
 }
 
 void eeprom_to_SRAM(void)
@@ -32,5 +32,5 @@ void eeprom_to_SRAM(void)
 	FAN_T_MIN	=	eeprom_read_word(&EE_FAN_T_MIN);
 	FAN_T_START	=	eeprom_read_word(&EE_FAN_T_START);
 	FAN_T_OFF	=	eeprom_read_word(&EE_FAN_T_OFF);
-	FAN_PWM_MIN	=	eeprom_read_word(&EE_FAN_PWM_MIN);
+	FAN_DUTY_MIN	=	eeprom_read_word(&EE_FAN_DUTY_MIN);
 }

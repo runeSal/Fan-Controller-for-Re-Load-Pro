@@ -55,7 +55,7 @@ static void set_FanRegValue(uint8_t setPointer, uint16_t setValue)
 		break;
 	case 5:
 	default:
-		FAN_PWM_MIN = (setValue*PWM_COUNTER_TOP+50)/100; //Calculate setValue% of PWM_COUNTER_TOP value.
+		FAN_DUTY_MIN = (setValue*PWM_COUNTER_TOP+50)/100; //Calculate setValue% of PWM_COUNTER_TOP value.
 		break;
 	}
 }

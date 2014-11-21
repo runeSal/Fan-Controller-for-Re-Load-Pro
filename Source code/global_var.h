@@ -12,7 +12,7 @@ extern uint16_t FAN_T_MAX;
 extern uint16_t FAN_T_MIN;
 extern uint16_t FAN_T_START;
 extern uint16_t FAN_T_OFF;
-extern uint16_t FAN_PWM_MIN;
+extern uint16_t FAN_DUTY_MIN;
 
 extern uint8_t update_eeprom;
 

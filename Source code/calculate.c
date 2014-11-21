@@ -15,12 +15,12 @@ uint16_t FAN_T_MAX;
 uint16_t FAN_T_MIN;
 uint16_t FAN_T_START;
 uint16_t FAN_T_OFF;
-uint16_t FAN_PWM_MIN;
+uint16_t FAN_DUTY_MIN;
 
 static uint16_t cal_PWM_slope()
 {
-	// the same as Round( (PWM_COUNTER_TOP-FAN_PWM_MIN)*P_FA/(FAN_T_MAX-FAN_T_MIN) )
-	return( ((PWM_COUNTER_TOP-FAN_PWM_MIN)*PM_FACTOR+(FAN_T_MAX-FAN_T_MIN)/2)/(FAN_T_MAX-FAN_T_MIN) );
+	// the same as Round( (PWM_COUNTER_TOP-FAN_DUTY_MIN)*P_FA/(FAN_T_MAX-FAN_T_MIN) )
+	return( ((PWM_COUNTER_TOP-FAN_DUTY_MIN)*PM_FACTOR+(FAN_T_MAX-FAN_T_MIN)/2)/(FAN_T_MAX-FAN_T_MIN) );
 }
 
 uint16_t cal_PWM_duty(uint16_t temperature, uint8_t *fan_state)
@@ -34,7 +34,7 @@ uint16_t cal_PWM_duty(uint16_t temperature, uint8_t *fan_state)
 		}
 		else if (temperature<=FAN_T_MIN)
 		{
-			return FAN_PWM_MIN;
+			return FAN_DUTY_MIN;
 		}
 		else if (temperature>FAN_T_MAX)
 		{
@@ -45,7 +45,7 @@ uint16_t cal_PWM_duty(uint16_t temperature, uint8_t *fan_state)
 			uint32_t cal_32 = (temperature-FAN_T_MIN)*(uint32_t)cal_PWM_slope();
 			uint16_t cal_16 = ((cal_32+PM_FACTOR/2)/PM_FACTOR);
 			// Return PWM timer value.
-			return (cal_16+FAN_PWM_MIN);
+			return (cal_16+FAN_DUTY_MIN);
 		}
 	}
 	else
@@ -53,7 +53,7 @@ uint16_t cal_PWM_duty(uint16_t temperature, uint8_t *fan_state)
 		if (temperature>=FAN_T_START)
 		{
 			*fan_state = ON;
-			return FAN_PWM_MIN;
+			return FAN_DUTY_MIN;
 		}	
 		else
 			return 0;	
